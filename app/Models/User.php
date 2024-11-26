@@ -21,6 +21,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'birth_date',
+        'about_me',
+        'profile_picture',
+        'role',
     ];
 
     /**
@@ -31,6 +35,10 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+    ];
+
+    protected $casts = [
+        'birth_date' => 'date',
     ];
 
     /**
@@ -44,5 +52,13 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+    public function news()
+    {
+        return $this->hasMany(News::class);
+    }
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
     }
 }
