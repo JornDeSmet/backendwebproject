@@ -1,12 +1,12 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
+            {{ __('Users') }}
         </h2>
     </x-slot>
 
     <div class="container mx-auto p-4">
-        <h1 class="text-2xl font-bold mb-4">Users</h1>
+        <h1 class="text-2xl font-bold mb-4">Users List</h1>
         @if (session('status') === 'user-added')
             <h1
                 x-data="{ show: true }"
