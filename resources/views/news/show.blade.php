@@ -23,17 +23,19 @@
             <p>Published: {{ $news->created_at->format('M d, Y') }}</p>
             <p>Last Updated: {{ $news->updated_at->format('M d, Y') }}</p>
         </div>
+        @auth
+            @if(auth()->user()->role === 'admin')
+                <div class="mt-6">
+                    <a href="{{ route('news.edit', $news) }}" class="bg-blue-500 text-white px-6 py-3 rounded hover:bg-blue-700 transition duration-200 inline-block">Edit</a>
 
-        @if(auth()->user()->role === 'admin')
-            <div class="mt-6">
-                <a href="{{ route('news.edit', $news) }}" class="bg-blue-500 text-white px-6 py-3 rounded hover:bg-blue-700 transition duration-200 inline-block">Edit</a>
+                    <form action="{{ route('news.destroy', $news) }}" method="POST" class="inline">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="bg-red-500 text-white px-6 py-3 rounded hover:bg-red-700 transition duration-200 inline-block">Delete</button>
+                    </form>
+                </div>
+            @endif
+        @endauth
 
-                <form action="{{ route('news.destroy', $news) }}" method="POST" class="inline">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="bg-red-500 text-white px-6 py-3 rounded hover:bg-red-700 transition duration-200 inline-block">Delete</button>
-                </form>
-            </div>
-        @endif
     </div>
 </x-app-layout>

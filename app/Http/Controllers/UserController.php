@@ -19,6 +19,9 @@ class UserController extends Controller
 
     public function toggleAdmin(User $user)
     {
+        if (auth()->user()->role !== 'admin') {
+            abort(403, 'Unauthorized action.');
+        }
 
         $user->role = $user->role === 'admin' ? 'user' : 'admin';
         $user->save();
@@ -40,6 +43,10 @@ class UserController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
+        if (auth()->user()->role !== 'admin') {
+            abort(403, 'Unauthorized action.');
+        }
+        
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],

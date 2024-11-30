@@ -20,6 +20,7 @@ class NewsController extends Controller
     {
         $news = News::latest()->get();
         $users = User::orderBy('name', 'asc')->get();
+
         return view('news.index', compact('news', 'users'));
     }
 
@@ -30,11 +31,19 @@ class NewsController extends Controller
 
     public function edit(News $news)
     {
+        if (auth()->user()->role !== 'admin') {
+            abort(403, 'Unauthorized action.');
+        }
+        
         return view('news.edit', compact('news'));
     }
 
     public function store(Request $request)
     {
+        if (auth()->user()->role !== 'admin') {
+            abort(403, 'Unauthorized action.');
+        }
+
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'summary' => 'required|string|max:500',
@@ -60,6 +69,10 @@ class NewsController extends Controller
 
     public function update(Request $request, News $news)
     {
+        if (auth()->user()->role !== 'admin') {
+            abort(403, 'Unauthorized action.');
+        }
+
         $validated = $request->validate([
             'title' => 'required|max:255',
             'summary' => 'required|max:255',
@@ -78,6 +91,10 @@ class NewsController extends Controller
 
     public function destroy(News $news)
     {
+        if (auth()->user()->role !== 'admin') {
+            abort(403, 'Unauthorized action.');
+        }
+
         $news->delete();
 
         return redirect()->route('news.index')->with('success', 'News deleted successfully!');
