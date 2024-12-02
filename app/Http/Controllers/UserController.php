@@ -26,7 +26,7 @@ class UserController extends Controller
         $user->role = $user->role === 'admin' ? 'user' : 'admin';
         $user->save();
 
-        return redirect()->route('users.index')->with('success', 'User role updated successfully!');
+        return redirect()->route('users.index')->with('status', 'User role updated successfully!');
     }
 
     public function index()
@@ -46,7 +46,7 @@ class UserController extends Controller
         if (auth()->user()->role !== 'admin') {
             abort(403, 'Unauthorized action.');
         }
-        
+
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
@@ -67,6 +67,6 @@ class UserController extends Controller
         ]);
         event(new Registered($user));
 
-        return Redirect::route('users.index')->with('status', 'user-added');
+        return Redirect::route('users.index')->with('status', 'user added successfully!');
     }
 }

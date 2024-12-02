@@ -5,8 +5,18 @@
         </h2>
     </x-slot>
 
+
     <div class="container mx-auto p-4">
         <h1 class="text-2xl font-bold mb-4">FAQ and Categories</h1>
+        @if(session('status'))
+            <div x-data="{ show: true }"
+                x-show="show"
+                x-transition
+                x-init="setTimeout(() => show = false, 4000)"
+                class="bg-green-500 text-white p-4 rounded mb-4">
+                {{ session('status') }}
+            </div>
+        @endif
         <div class="mt-6">
             @auth
                 @if(auth()->user()->role === 'admin')
@@ -84,7 +94,7 @@
                     </div>
 
                     <div class="mt-4">
-                        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Create Category</button>
+                        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mr-2">Create Category</button>
                         <button type="button" id="closeCategoryModal" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">Cancel</button>
                     </div>
                 </form>
@@ -104,7 +114,7 @@
                     </div>
 
                     <div class="mt-4 flex justify-end">
-                        <button type="button" id="closeEditCategoryModal" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">Cancel</button>
+                        <button type="button" id="closeEditCategoryModal" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 mr-2">Cancel</button>
                         <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Save Changes</button>
                     </div>
                 </form>
@@ -131,7 +141,7 @@
                     <input type="hidden" name="category_id" id="category_id">
 
                     <div class="mt-4 flex justify-end">
-                        <button type="button" id="closeFaqModal" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">Cancel</button>
+                        <button type="button" id="closeFaqModal" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 mr-2">Cancel</button>
                         <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Add FAQ</button>
                     </div>
                 </form>
@@ -160,7 +170,7 @@
                     <input type="hidden" id="edit_faq_category_id" name="category_id">
 
                     <div class="mt-4 flex justify-end">
-                        <button type="button" id="closeEditFaqModal" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">Cancel</button>
+                        <button type="button" id="closeEditFaqModal" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 mr-2">Cancel</button>
                         <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Save Changes</button>
                     </div>
                 </form>

@@ -8,15 +8,16 @@
     <div class="container mx-auto p-4">
         <h1 class="text-2xl font-bold mb-4">News List</h1>
 
-        @if (session('status') === 'news-added')
-            <h1
-                x-data="{ show: true }"
+        @if(session('status'))
+            <div x-data="{ show: true }"
                 x-show="show"
                 x-transition
                 x-init="setTimeout(() => show = false, 4000)"
-                class="text-sm text-gray-600 font-bold text-2xl"
-            >{{ __('News added') }}</h1>
+                class="bg-green-500 text-white p-4 rounded mb-4">
+                {{ session('status') }}
+            </div>
         @endif
+
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             @auth
@@ -88,7 +89,7 @@
                     </select>
                 </div>
 
-                
+
                 <div class="mt-6 flex justify-end">
                     <button type="button" id="closeModalButton"
                         class="bg-gray-500 text-white px-4 py-2 rounded mr-2 hover:bg-gray-600">

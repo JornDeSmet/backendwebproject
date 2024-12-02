@@ -34,7 +34,7 @@ class NewsController extends Controller
         if (auth()->user()->role !== 'admin') {
             abort(403, 'Unauthorized action.');
         }
-        
+
         return view('news.edit', compact('news'));
     }
 
@@ -64,7 +64,7 @@ class NewsController extends Controller
             'author_id' => $validated['author_id'],
         ]);
 
-        return redirect()->route('news.index')->with('status', 'news-added');
+        return redirect()->route('news.index')->with('status', 'news added successfully!');
     }
 
     public function update(Request $request, News $news)

@@ -37,10 +37,13 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link>
-                        {{ __('contact') }}
+                    <x-nav-link
+                        :href="Auth::check() && Auth::user()->role === 'admin' ? route('admin-contact.index') : route('contact.index')"
+                        :active="request()->routeIs(Auth::check() && Auth::user()->role === 'admin' ? 'admin-contact.index' : 'contact.index')">
+                        {{ __('Contact') }}
                     </x-nav-link>
                 </div>
+
             </div>
 
             <!-- Settings Dropdown -->

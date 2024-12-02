@@ -4,11 +4,28 @@
             {{ __('News') }}
         </h2>
     </x-slot>
+    @if(session('success'))
+        <div x-data="{ show: true }"
+            x-show="show"
+            x-transition
+            x-init="setTimeout(() => show = false, 4000)"
+            class="bg-green-500 text-white p-4 rounded mb-4">
+            {{ session('success') }}
+        </div>
+    @endif
+
 
     <div class="container mx-auto p-4">
         <h1 class="text-3xl font-bold mb-4">{{ $news->title }}</h1>
 
-        <img src="{{ $news->image ? asset('storage/' . $news->image) : 'default-image.jpg' }}" alt="News Image" class="w-full h-auto rounded-lg mb-4">
+        <div class="w-full max-h-[800px] bg-white flex items-center justify-center overflow-hidden rounded-lg mb-4">
+            <img
+                src="{{ $news->image ? asset('storage/' . $news->image) : 'default-image.jpg' }}"
+                alt="News Image"
+                class="max-w-full max-h-full object-contain"
+            />
+        </div>
+
 
 
         <div class="text-base text-gray-800 mb-4">

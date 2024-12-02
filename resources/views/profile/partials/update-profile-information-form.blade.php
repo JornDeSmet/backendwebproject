@@ -7,6 +7,15 @@
         <p class="mt-1 text-sm text-gray-600">
             {{ __("Update your account's profile information and email address.") }}
         </p>
+        @if(session('status'))
+            <div x-data="{ show: true }"
+                x-show="show"
+                x-transition
+                x-init="setTimeout(() => show = false, 4000)"
+                class="bg-green-500 text-white p-3 rounded mb-4 mt-4">
+                {{ session('status') }}
+            </div>
+        @endif
     </header>
 
     <form id="send-verification" method="post" action="{{ route('verification.send') }}">
@@ -48,12 +57,6 @@
                             {{ __('Click here to re-send the verification email.') }}
                         </button>
                     </p>
-
-                    @if (session('status') === 'verification-link-sent')
-                        <p class="mt-2 font-medium text-sm text-green-600">
-                            {{ __('A new verification link has been sent to your email address.') }}
-                        </p>
-                    @endif
                 </div>
             @endif
         </div>
