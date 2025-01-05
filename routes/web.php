@@ -20,6 +20,7 @@ Route::post('/contact', [ContactController::class, 'store'])->name('contact.stor
 
 Route::get('/news', [NewsController::class, 'index'])->name('news.index');
 Route::get('/news/{news}', [NewsController::class, 'show'])->name('news.show');
+Route::post('/news/{news}/comments', [NewsController::class, 'addComment'])->name('news.addComment');
 
 Route::get('/faq', [FaqController::class, 'index'])->name('faq.index');
 
@@ -75,5 +76,44 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::post('/{id}/reply', [AdminContactController::class, 'reply'])->name('admin-contact.reply');
     });
 });
+
+use App\Http\Controllers\ProductController;
+
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
+
+use App\Http\Controllers\CartController;
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+    Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
+    Route::put('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
+
+});
+
+use App\Http\Controllers\CheckoutController;
+
+Route::middleware('auth')->group(function () {
+    Route::get('/checkout', [CheckoutController::class, 'createCheckoutSession'])->name('checkout');
+    Route::get('/checkout/success', [CheckoutController::class, 'success'])->name('checkout.success');
+    Route::get('/checkout/cancel', [CheckoutController::class, 'cancel'])->name('checkout.cancel');
+});
+
+
+use App\Http\Controllers\OrderController;
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile/orders', [OrderController::class, 'index'])->name('profile.orders');
+});
+
+
+
+use App\Http\Controllers\OrderManagementController;
+use App\Http\Controllers\ProductManagementController;
+
+
+Route::get('/admin/orders', [OrderManagementController::class, 'index'])->name('admin.orders.index');
+
 
 require __DIR__.'/auth.php';

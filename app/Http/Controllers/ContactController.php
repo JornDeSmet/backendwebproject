@@ -28,7 +28,7 @@ class ContactController extends Controller
             'email' => $validated['email'],
             'message' => $validated['messages'],
         ]);
-        Mail::to('jorn.de.smet@student.ehb.be')->send(new ContactMail($request->all()));
+        Mail::to(env('MAIL_FROM_ADDRESS'))->send(new ContactMail($request->all()));
 
 
         return redirect()->route('contact.index')->with('success', 'Your message has been sent successfully!');

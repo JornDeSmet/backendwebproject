@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Gate;
 use App\Models\User;
+use App\Models\Comment;
 
 
 class NewsController extends Controller
@@ -26,7 +27,8 @@ class NewsController extends Controller
 
     public function show(News $news)
     {
-        return view('news.show', compact('news'));
+        $comments = $news->comments()->whereNull('parent_id')->with('replies.user')->get();
+        return view('news.show', compact('news', 'comments'));
     }
 
     public function edit(News $news)
@@ -99,4 +101,23 @@ class NewsController extends Controller
 
         return redirect()->route('news.index')->with('success', 'News deleted successfully!');
     }
+
+    public function addComment(Request $request, News $news)
+    {
+        $validated = $request->validate([
+            'content' => 'required|string|max:500',
+            'parent_id' => 'nullable|exists:comments,id',
+        ]);
+
+        Comment::create([
+            'content' => $validated['content'],
+            'user_id' => auth()->id(),
+            'news_id' => $news->id,
+            'parent_id' => $validated['parent_id'] ?? null,
+        ]);
+
+        return redirect()->route('news.show', $news)->with('success', 'Comment added successfully!');
+    }
+
+
 }
