@@ -1,66 +1,214 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Backend Web - Laravel Project
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Dit project is een Laravel-gebaseerde webapplicatie ontworpen voor het beheren van nieuws, profielen, veelgestelde vragen, berichten en gebruikersauthenticatie. Het bevat zowel openbare als admin-functionaliteiten, waarmee contentbeheer en gebruikersinteractie mogelijk zijn.
 
-## About Laravel
+## Technologieën
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- **VScode**
+- **Laravel**
+- **Composer**
+- **PHP**
+- **Stripe**
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Inhoudsopgave
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+1. [Functionaliteiten](#functionaliteiten)
+2. [Installatieproces](#installatieproces)
+3. [Migratie- en Seederproces](#migratie--en-seederproces)
+4. [Gebruik](#gebruik)
+5. [Bronnen](#bronnen)
+6. [Licentie](#licentie)
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Functionaliteiten
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### **Gebruikersfunctionaliteiten (User Capabilities)**
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- **Gebruikersauthenticatie**:
+  - Registreren, inloggen en uitloggen.
+  - Wachtwoord resetten via e-mail (indien vergeten).
+- **Gebruikers**:
+  - Zie alle gebruikers
+  - Zie een gebruiker zijn profiel
 
-## Laravel Sponsors
+- **Nieuws en reacties**:
+  - Bekijk nieuwsartikelen.
+  - Reageer op nieuwsitems.
+  - Bekijk en reageer op reacties van andere gebruikers.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- **FAQ (Veelgestelde vragen)**:
+  - Bekijk veelgestelde vragen.
+  - Zoek door FAQ-items om snel antwoorden te vinden.
 
-### Premium Partners
+- **Contactformulier**:
+  - Vul een formulier in om contact op te nemen.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+- **Profielbeheer**:
+  - Bekijk en bewerk persoonlijke gegevens (zoals naam, e-mail, wachtwoord, adress).
+  - Bekijk bestelgeschiedenis en volg huidige bestellingen.
 
-## Contributing
+- **Winkel en betalingen**:
+  - Blader door producten in de webshop.
+  - Voeg producten toe aan de winkelwagen.
+  - Werk de winkelwagen bij (producten verwijderen of aantallen aanpassen).
+  - Betaal voor bestellingen via Stripe.
+  - Volg de status van bestellingen (bijv. in behandeling, verzonden, geleverd).
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+---
 
-## Code of Conduct
+### **Beheerfunctionaliteiten (Admin Capabilities)**
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- **Gebruikersbeheer**:
+  - Bekijk alle geregistreerde gebruikers.
+  - Verwijder ongewenste of inactieve gebruikers.
+  - Pas gegevens van gebruikers aan (zoals e-mail, wachtwoord of naam).
 
-## Security Vulnerabilities
+- **Nieuwsbeheer**:
+  - Voeg nieuwe nieuwsartikelen toe.
+  - Bewerk bestaande nieuwsartikelen.
+  - Verwijder ongewenste of verouderde nieuwsartikelen.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- **FAQ Beheer**:
+  - Voeg veelgestelde vragen toe.
+  - Voeg, verwijder categorien
+  - Bewerk bestaande FAQ-items.
+  - Verwijder verouderde of irrelevante FAQ-items.
 
-## License
+- **Productbeheer (Webshop)**:
+  - Voeg nieuwe producten toe, inclusief afbeeldingen, beschrijving, prijs en voorraad.
+  - Bewerk bestaande producten.
+  - Verwijder producten die niet meer beschikbaar zijn.
+  - Beheer voorraad en houd deze up-to-date.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- **Bestellingen Beheren**:
+  - Bekijk alle bestellingen van gebruikers.
+  - Wijzig de status van een bestelling (bijv. in behandeling, verzonden, geleverd).
+
+- **Reacties**:
+  - Bekijk en verwijder ongepaste reacties of posts.
+
+- **Contactbeheer**:
+  - Bekijk en beantwoord berichten van gebruikers via het contactformulier.
+---
+
+
+
+## Installatieproces
+
+Volg de onderstaande stappen om het project op je lokale omgeving op te zetten:
+
+1. **Kloon de repository**:
+   ```bash
+   git clone https://github.com/JornDeSmet/backendwebproject.git
+   ```
+
+2. **Installeer afhankelijkheden**:
+   ```bash
+   composer install
+   npm install && npm run dev
+   ```
+
+3. **Stel het `.env`-bestand in**:
+   Maak een `.env`-bestand in de rootdirectory en kopieer de inhoud van `.env.example`:
+   ```bash
+   cp .env.example .env
+   ```
+
+4. **Genereer de applicatiesleutel**:
+   ```bash
+   php artisan key:generate
+   ```
+
+5. **Link de storage**:
+   ```bash
+   php artisan storage:link
+   ```
+
+6. **Stel de database in**:
+   - Maak een MySQL-database lokaal aan (bijv. `backendweb_laravel`).
+   - Update het `.env`-bestand met je databasegegevens:
+     ```
+     DB_CONNECTION=je_soort_database
+     DB_HOST=127.0.0.1
+     DB_PORT=3306
+     DB_DATABASE=backendweb_laravel
+     DB_USERNAME=je_database_gebruiker
+     DB_PASSWORD=je_database_wachtwoord
+     ```
+
+7. **Configureer de e-mailservice**:
+   - Update het `.env`-bestand met je e-mailservicegegevens:
+     ```
+     MAIL_MAILER=smtp
+     MAIL_HOST=je_mail_host
+     MAIL_PORT=587
+     MAIL_USERNAME=je_mail_gebruiker
+     MAIL_PASSWORD=je_mail_wachtwoord
+     MAIL_ENCRYPTION=tls
+     MAIL_FROM_ADDRESS=noreply@example.com
+     MAIL_FROM_NAME="Laravel App"
+     ```
+8. **Je Stripe public en private key**
+   - Update het `.env`-bestand met je stripegegevens:
+     ```
+     STRIPE_KEY = je_stripe_public_key
+     STRIPE_SECRET = je_stripe_private_key
+     ```
+---
+
+## Migratie- en Seederproces
+
+1. **Voer migraties uit**:
+   ```bash
+   php artisan migrate
+   ```
+
+2. **Seed de database**:
+   Het project bevat seeders om de database te vullen met initiële gegevens:
+   ```bash
+   php artisan db:seed
+   ```
+
+3. **Combineer migratie en seeding (optioneel)**:
+   ```bash
+   php artisan migrate --seed
+   ```
+
+4. **Aanpassen van seeders**:
+   - Seeders kunnen worden aangepast om specifieke hoeveelheden gegevens te genereren.
+
+---
+
+## Gebruik
+
+1. **Start de ontwikkelserver**:
+   ```bash
+   php artisan serve
+   ```
+
+2. **Toegang tot de applicatie**:
+   Open je browser en ga naar [http://127.0.0.1:8000](http://127.0.0.1:8000).
+
+3. **Admin toegang**:
+   - Standaard wordt een admin-gebruiker ge-seed in de database:
+     - **E-mail**: `admin@ehb.be`
+     - **Wachtwoord**: `Password!321`
+
+4. **Openbare toegang**:
+   - Gebruikers kunnen zich registreren of inloggen om toegang te krijgen tot profiel- en nieuwsfunctionaliteiten.
+
+---
+
+## Bronnen
+
+- [Laravel-documentatie](https://laravel.com/docs)
+- [Composer-documentatie](https://getcomposer.org/doc/)
+- [Node.js en NPM](https://nodejs.org/)
+- [PHP Documentatie](https://www.php.net/manual/en/)
+
+---
+
+## Licentie
+
+Dit project is beschikbaar onder de [MIT-licentie](https://opensource.org/licenses/MIT).
