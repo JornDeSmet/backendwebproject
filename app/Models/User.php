@@ -25,6 +25,11 @@ class User extends Authenticatable
         'about_me',
         'profile_picture',
         'role',
+        'address_line',
+        'city',
+        'state',
+        'postal_code',
+        'country',
     ];
 
     /**

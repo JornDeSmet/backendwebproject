@@ -25,13 +25,12 @@ class ProfileController extends Controller
     /**
      * Update the user's profile information.
      */
-        public function update(ProfileUpdateRequest $request): RedirectResponse
+    public function update(ProfileUpdateRequest $request): RedirectResponse
     {
         $validatedData = $request->validated();
 
         if ($request->hasFile('profile_picture') && $request->file('profile_picture')->isValid()) {
             $path = $request->file('profile_picture')->store('images', 'public');
-
             $validatedData['profile_picture'] = basename($path);
         } else {
             $validatedData['profile_picture'] = $request->user()->profile_picture;
@@ -41,12 +40,17 @@ class ProfileController extends Controller
             $request->user()->email_verified_at = null;
         }
 
+        // Convert birth_date to proper format
         if ($request->filled('birth_date')) {
             $validatedData['birth_date'] = Carbon::parse($request->birth_date)->toDateString();
         }
 
-        if ($request->filled('about_me')) {
-            $validatedData['about_me'] = $request->about_me;
+        // Add address fields
+        $addressFields = ['address_line', 'city', 'state', 'postal_code', 'country'];
+        foreach ($addressFields as $field) {
+            if ($request->filled($field)) {
+                $validatedData[$field] = $request->$field;
+            }
         }
 
         $request->user()->fill($validatedData);
@@ -54,6 +58,7 @@ class ProfileController extends Controller
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
+
 
 
     /**

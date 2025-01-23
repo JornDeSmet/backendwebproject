@@ -19,12 +19,12 @@
                 @foreach ($products as $product)
                     <div class="bg-white shadow-md rounded-lg p-4">
 
-                        <img src="{{ $product->image }}" alt="{{ $product->name }}" class="rounded-lg w-full h-40 object-cover mb-4">
+                        <img src="{{ Str::startsWith($product->image, 'http') ? $product->image : asset('storage/products/' . $product->image) }}" alt="{{ $product->name }}" class="rounded-lg w-full h-40 object-cover mb-4">
                         <h2 class="text-lg font-semibold text-gray-800">{{ $product->name }}</h2>
                         <p class="text-gray-600 text-sm mt-2">{{ Str::limit($product->description, 50) }}</p>
                         <p class="text-green-500 font-bold mt-2">${{ number_format($product->price, 2) }}</p>
 
-                        <a href="{{ route('products.show', $product->id) }}" class="block mt-4 text-center bg-blue-500 text-white py-2 rounded-lg shadow hover:bg-blue-600">
+                        <a href="{{ route('shop.show', $product->id) }}" class="block mt-4 text-center bg-blue-500 text-white py-2 rounded-lg shadow hover:bg-blue-600">
                             View Details
                         </a>
                     </div>

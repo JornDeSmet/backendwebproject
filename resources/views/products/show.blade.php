@@ -6,16 +6,13 @@
     </x-slot>
 
     <div class="container mx-auto p-6">
-        <!-- Back Button -->
-        <a href="{{ url('/products') }}" class="text-blue-500 hover:text-blue-700 font-semibold mb-4 inline-block">
-            &larr; Back to Products
-        </a>
+        <x-go-back/>
 
         <!-- Product Details -->
         <div class="bg-white shadow-md rounded-lg p-6 flex flex-wrap">
             <!-- Product Image -->
             <div class="w-full md:w-1/2">
-                <img src="{{ $product->image }}" alt="{{ $product->name }}" class="rounded-lg shadow-md w-full">
+                <img src="{{ Str::startsWith($product->image, 'http') ? $product->image : asset('storage/products/' . $product->image) }}" alt="{{ $product->name }}" alt="{{ $product->name }}" class="rounded-lg shadow-md w-full">
             </div>
 
             <!-- Product Info -->

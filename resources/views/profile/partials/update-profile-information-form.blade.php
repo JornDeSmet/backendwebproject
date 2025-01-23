@@ -72,6 +72,35 @@
             <x-text-input id="about_me" name="about_me" type="text" class="mt-1 block w-full" :value="old('about_me', $user->about_me)" autofocus autocomplete="about_me" />
             <x-input-error class="mt-2" :messages="$errors->get('about_me')" />
         </div>
+        <div>
+            <x-input-label for="address_line" :value="__('Address Line')" />
+            <x-text-input id="address_line" name="address_line" type="text" class="mt-1 block w-full" :value="old('address_line', $user->address_line)" required />
+            <x-input-error class="mt-2" :messages="$errors->get('address_line')" />
+        </div>
+
+        <div>
+            <x-input-label for="city" :value="__('City')" />
+            <x-text-input id="city" name="city" type="text" class="mt-1 block w-full" :value="old('city', $user->city)" required />
+            <x-input-error class="mt-2" :messages="$errors->get('city')" />
+        </div>
+
+        <div>
+            <x-input-label for="state" :value="__('State')" />
+            <x-text-input id="state" name="state" type="text" class="mt-1 block w-full" :value="old('state', $user->state)" />
+            <x-input-error class="mt-2" :messages="$errors->get('state')" />
+        </div>
+
+        <div>
+            <x-input-label for="postal_code" :value="__('Postal Code')" />
+            <x-text-input id="postal_code" name="postal_code" type="text" class="mt-1 block w-full" :value="old('postal_code', $user->postal_code)" required />
+            <x-input-error class="mt-2" :messages="$errors->get('postal_code')" />
+        </div>
+
+        <div>
+            <x-input-label for="country" :value="__('Country')" />
+            <x-text-input id="country" name="country" type="text" class="mt-1 block w-full" :value="old('country', $user->country)" required />
+            <x-input-error class="mt-2" :messages="$errors->get('country')" />
+        </div>
 
 
 

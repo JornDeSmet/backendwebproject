@@ -9,16 +9,9 @@
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
                     </a>
                 </div>
-
-                <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
-                    </x-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link>
-                        {{ __('Leaderbord') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
@@ -37,17 +30,40 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link
-                        :href="Auth::check() && Auth::user()->role === 'admin' ? route('admin-contact.index') : route('contact.index')"
-                        :active="request()->routeIs(Auth::check() && Auth::user()->role === 'admin' ? 'admin-contact.index' : 'contact.index')">
-                        {{ __('Contact') }}
-                    </x-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('products.index')" :active="request()->routeIs('products.index')">
-                        {{ __('shop') }}
+                    <x-nav-link :href="route('contact.index')" :active="request()->routeIs('contact.index')">
+                        {{ __('contact') }}
                     </x-nav>
                 </div>
+                @if(Auth::check() && Auth::user()->role != 'admin')
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('shop.index')" :active="request()->routeIs('shop.index')">
+                            {{ __('shop') }}
+                        </x-nav>
+                    </div>
+                @endif
+                @if(Auth::check() && Auth::user()->role === 'admin')
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('admin-contact.index')" :active="request()->routeIs('admin-contact.index')">
+                            {{ __('contact') }}
+                        </x-nav>
+                    </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('shop.index')" :active="request()->routeIs('shop.index')">
+                            {{ __('shop') }}
+                        </x-nav>
+                    </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('products.index')" :active="request()->routeIs('products.index')">
+                            {{ __('products') }}
+                        </x-nav>
+                    </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('admin.orders.index')" :active="request()->routeIs('admin.orders.index')">
+                            {{ __('orders') }}
+                        </x-nav>
+                    </div>
+                @endif
+
             </div>
 
             <!-- Settings Dropdown -->
@@ -69,6 +85,12 @@
                         <x-slot name="content">
                             <x-dropdown-link :href="route('profile.edit')">
                                 {{ __('Profile') }}
+                            </x-dropdown-link>
+                            <x-dropdown-link :href="route('cart.index')">
+                                {{ __('Cart') }}
+                            </x-dropdown-link>
+                            <x-dropdown-link :href="route('profile.orders')">
+                                {{ __('Orders') }}
                             </x-dropdown-link>
 
                             <!-- Authentication -->

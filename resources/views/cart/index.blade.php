@@ -1,12 +1,35 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Cart') }}
-        </h2>
+        <div class="flex justify-between items-center">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __('Your Cart') }}
+            </h2>
+            <nav class="flex space-x-4">
+                <a href="{{ route('profile.edit') }}"
+                   class="text-gray-600 hover:text-gray-800 border-b-2 border-transparent hover:border-gray-800">
+                    {{ __('Profile') }}
+                </a>
+                <a href="{{ route('cart.index') }}"
+                   class="text-gray-600 hover:text-gray-800 border-b-2 border-transparent hover:border-gray-800">
+                    {{ __('Cart') }}
+                </a>
+                <a href="{{ route('profile.orders') }}"
+                   class="text-gray-600 hover:text-gray-800 border-b-2 border-transparent hover:border-gray-800">
+                    {{ __('Orders') }}
+                </a>
+            </nav>
+        </div>
     </x-slot>
 
     <div class="container mx-auto p-6">
         <h1 class="text-3xl font-bold mb-6">Your Cart</h1>
+
+        @if (session('error'))
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-6" role="alert">
+                <strong class="font-bold">Error:</strong>
+                <span class="block sm:inline">{{ session('error') }}</span>
+            </div>
+        @endif
 
         @if ($cart && $cart->items->count() > 0)
             <div class="bg-white shadow-md rounded-lg p-6">
@@ -54,9 +77,8 @@
                 </table>
             </div>
 
-            <!-- Continue Shopping Button -->
             <div class="mt-4">
-                <a href="{{ url('/products') }}" class="bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600">
+                <a href="{{ url('/shop') }}" class="bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600">
                     Continue Shopping
                 </a>
             </div>
@@ -66,7 +88,14 @@
                 </a>
             </div>
         @else
-            <p>Your cart is empty.</p>
+            <div class="text-center bg-gray-100 p-12 rounded-lg shadow-md">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Your Cart is Empty</h2>
+                <p class="text-gray-500 mb-6">Looks like you haven't added anything to your cart yet. Start exploring our shop!</p>
+                <a href="{{ url('/shop') }}"
+                   class="bg-blue-500 text-white px-6 py-3 rounded-lg shadow hover:bg-blue-600">
+                    Shop Now
+                </a>
+            </div>
         @endif
     </div>
 </x-app-layout>

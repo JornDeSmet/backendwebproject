@@ -44,6 +44,35 @@
 
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
+        <div>
+            <x-input-label for="address_line" :value="__('Address Line')" />
+            <x-text-input id="address_line" name="address_line" type="text" class="mt-1 block w-full" :value="old('address_line')" required />
+            <x-input-error class="mt-2" :messages="$errors->get('address_line')" />
+        </div>
+
+        <div>
+            <x-input-label for="city" :value="__('City')" />
+            <x-text-input id="city" name="city" type="text" class="mt-1 block w-full" :value="old('city')" required />
+            <x-input-error class="mt-2" :messages="$errors->get('city')" />
+        </div>
+
+        <div>
+            <x-input-label for="state" :value="__('State')" />
+            <x-text-input id="state" name="state" type="text" class="mt-1 block w-full" :value="old('state')" />
+            <x-input-error class="mt-2" :messages="$errors->get('state')" />
+        </div>
+
+        <div>
+            <x-input-label for="postal_code" :value="__('Postal Code')" />
+            <x-text-input id="postal_code" name="postal_code" type="text" class="mt-1 block w-full" :value="old('postal_code')" required />
+            <x-input-error class="mt-2" :messages="$errors->get('postal_code')" />
+        </div>
+
+        <div>
+            <x-input-label for="country" :value="__('Country')" />
+            <x-text-input id="country" name="country" type="text" class="mt-1 block w-full" :value="old('country')" required />
+            <x-input-error class="mt-2" :messages="$errors->get('country')" />
+        </div>
 
         <div class="flex items-center justify-end mt-4">
             <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">

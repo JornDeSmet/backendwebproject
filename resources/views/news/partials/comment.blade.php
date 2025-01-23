@@ -1,5 +1,5 @@
 <div class="p-4 border rounded bg-gray-50">
-    <p><strong>{{ $comment->user->name }}</strong>: {{ $comment->content }}</p>
+    <p class="break-words whitespace-normal"><strong>{{ $comment->user->name }}</strong>: {{ $comment->content }}</p>
 
     <!-- Reply Form -->
     @auth

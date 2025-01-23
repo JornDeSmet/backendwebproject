@@ -37,6 +37,11 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'birth_date' => ['nullable', 'date', 'before_or_equal:' . now()->toDateString()],
             'role' => ['nullable', 'in:user,admin'],
+            'address_line' => ['required', 'string', 'max:255'],
+            'city' => ['required', 'string', 'max:100'],
+            'state' => ['nullable', 'string', 'max:100'],
+            'postal_code' => ['required', 'string', 'max:20'],
+            'country' => ['required', 'string', 'max:100'],
 
         ]);
         $birth_date = Carbon::createFromDate(
@@ -48,6 +53,11 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
             'birth_date' => $birth_date,
             'role' => $request->role ?? 'user',
+            'address_line' => $request->address_line,
+            'city' => $request->city,
+            'state' => $request->state,
+            'postal_code' => $request->postal_code,
+            'country' => $request->country,
         ]);
         event(new Registered($user));
 

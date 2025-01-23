@@ -4,7 +4,9 @@
             {{ __('FAQ and Categories') }}
         </h2>
     </x-slot>
-
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 
     <div class="container mx-auto p-4">
         <h1 class="text-2xl font-bold mb-4">FAQ and Categories</h1>
@@ -177,7 +179,7 @@
             </div>
         </div>
     </div>
-
+</div>
     <script>
         // Open Add Category Modal
         document.getElementById('addCategoryBtn').addEventListener('click', function() {

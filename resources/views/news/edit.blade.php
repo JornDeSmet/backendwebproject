@@ -4,7 +4,10 @@
             {{ __('News') }}
         </h2>
     </x-slot>
-
+    <div class="py-12">
+        <div class="max-w-custom mx-auto sm:px-8 lg:px-10" style="width: 60%">
+            <div class="bg-white shadow-md sm:rounded-lg m-4">
+                <div class="container mx-auto p-6">
     <div class="container mx-auto p-4">
         <h1 class="text-2xl font-bold mb-4">Edit News</h1>
 
@@ -43,4 +46,5 @@
             </div>
         </form>
     </div>
+</div>
 </x-app-layout>

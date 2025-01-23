@@ -8,6 +8,7 @@ use Stripe\Checkout\Session;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Cart;
+use Exception;
 
 class CheckoutController extends Controller
 {
@@ -17,6 +18,9 @@ class CheckoutController extends Controller
 
         $lineItems = [];
         foreach ($cart->items as $item) {
+            if ($item->product->stock < $item->quantity) {
+                return redirect()->back()->withErrors("Insufficient stock for product: {$item->product->name}");
+            }
             $lineItems[] = [
                 'price_data' => [
                     'currency' => 'usd',
@@ -29,17 +33,23 @@ class CheckoutController extends Controller
             ];
         }
 
-        Stripe::setApiKey(config('services.stripe.secret'));
+        try {
+            Stripe::setApiKey(config('services.stripe.secret'));
 
-        $checkoutSession = Session::create([
-            'payment_method_types' => ['card'],
-            'line_items' => $lineItems,
-            'mode' => 'payment',
-            'success_url' => route('checkout.success'),
-            'cancel_url' => route('checkout.cancel'),
-        ]);
+            $checkoutSession = Session::create([
+                'payment_method_types' => ['card'],
+                'line_items' => $lineItems,
+                'mode' => 'payment',
+                'success_url' => route('checkout.success'),
+                'cancel_url' => route('checkout.cancel'),
+            ]);
 
-        return redirect($checkoutSession->url);
+            return redirect($checkoutSession->url);
+        } catch (Exception $e) {
+            session()->flash('error', 'Something went wrong with the payment server. Please try again later.');
+            return redirect()->back();
+
+        }
     }
 
     public function success()
@@ -57,10 +67,17 @@ class CheckoutController extends Controller
         ]);
 
         foreach ($cart->items as $cartItem) {
+            $product = $cartItem->product;
+            if ($product->stock < $cartItem->quantity) {
+                throw new \Exception("Insufficient stock for product: {$product->name}");
+            }
+            $product->stock -= $cartItem->quantity;
+            $product->save();
+
             $order->items()->create([
-                'product_id' => $cartItem->product->id,
+                'product_id' => $product->id,
                 'quantity' => $cartItem->quantity,
-                'price' => $cartItem->product->price,
+                'price' => $product->price,
             ]);
         }
 
