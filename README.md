@@ -102,30 +102,33 @@ Volg de onderstaande stappen om het project op je lokale omgeving op te zetten:
    ```bash
    git clone https://github.com/JornDeSmet/backendwebproject.git
    ```
-
-2. **Installeer afhankelijkheden**:
+2. **Kloon de repository**:
+   ```bash
+   cd backendwebproject
+   ```
+3. **Installeer afhankelijkheden**:
    ```bash
    composer install
    npm install && npm run dev
    ```
 
-3. **Stel het `.env`-bestand in**:
+4. **Stel het `.env`-bestand in**:
    Maak een `.env`-bestand in de rootdirectory en kopieer de inhoud van `.env.example`:
    ```bash
    cp .env.example .env
    ```
 
-4. **Genereer de applicatiesleutel**:
+5. **Genereer de applicatiesleutel**:
    ```bash
    php artisan key:generate
    ```
 
-5. **Link de storage**:
+6. **Link de storage**:
    ```bash
    php artisan storage:link
    ```
 
-6. **Stel de database in**:
+7. **Stel de database in**:
    - Maak een MySQL-database lokaal aan (bijv. `backendweb_laravel`).
    - Update het `.env`-bestand met je databasegegevens:
      ```
@@ -137,7 +140,7 @@ Volg de onderstaande stappen om het project op je lokale omgeving op te zetten:
      DB_PASSWORD=je_database_wachtwoord
      ```
 
-7. **Configureer de e-mailservice**:
+8. **Configureer de e-mailservice**:
    - Update het `.env`-bestand met je e-mailservicegegevens:
      ```
      MAIL_MAILER=smtp
@@ -149,7 +152,7 @@ Volg de onderstaande stappen om het project op je lokale omgeving op te zetten:
      MAIL_FROM_ADDRESS=noreply@example.com
      MAIL_FROM_NAME="Laravel App"
      ```
-8. **Je Stripe public en private key**
+9. **Je Stripe public en private key**
    - Update het `.env`-bestand met je stripegegevens:
      ```
      STRIPE_KEY = je_stripe_public_key
