@@ -102,14 +102,16 @@ Volg de onderstaande stappen om het project op je lokale omgeving op te zetten:
    ```bash
    git clone https://github.com/JornDeSmet/backendwebproject.git
    ```
-2. **Kloon de repository**:
-   ```bash
-   cd backendwebproject
-   ```
-3. **Installeer afhankelijkheden**:
+
+2. **Installeer afhankelijkheden**:
    ```bash
    composer install
    npm install && npm run dev
+   ```
+   laat deze openstaan zodanig dat het project kan werken.
+3. **Open een andere ubuntu cli**:
+   ```bash
+   cd backendwebproject
    ```
 
 4. **Stel het `.env`-bestand in**:
@@ -162,25 +164,25 @@ Volg de onderstaande stappen om het project op je lokale omgeving op te zetten:
 
 ## Migratie- en Seederproces
 
-1. **Voer migraties uit**:
+1. ***Ga naar je project*
+      ```bash
+       cd backendwebproject
+       ```
+2. **Voer migraties uit**:
    ```bash
    php artisan migrate
    ```
 
-2. **Seed de database**:
+3. **Seed de database**:
    Het project bevat seeders om de database te vullen met initiële gegevens:
    ```bash
    php artisan db:seed
    ```
 
-3. **Combineer migratie en seeding (optioneel)**:
+4. **Combineer migratie en seeding (optioneel)**:
    ```bash
    php artisan migrate --seed
    ```
-
-4. **Aanpassen van seeders**:
-   - Seeders kunnen worden aangepast om specifieke hoeveelheden gegevens te genereren.
-
 ---
 
 ## Gebruik
