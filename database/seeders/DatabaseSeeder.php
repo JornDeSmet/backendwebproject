@@ -3,9 +3,13 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use App\Models\News;
+use App\Models\Product;
+use App\Models\Faq;
+use App\Models\Category;
+use App\Models\Comment;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,6 +19,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         User::factory()->count(5)->create();
+        News::factory()->count(5)->create();
 
         User::create([
             'name' => 'Admin',
@@ -23,5 +28,19 @@ class DatabaseSeeder extends Seeder
             'role' => 'admin',
             'birth_date' => '0-00-00',
         ]);
+        Product::truncate();
+        Product::factory()->count(8)->create();
+        Category::factory()->count(5)->create()->each(function ($category) {
+            Faq::factory()->count(3)->create([
+                'category_id' => $category->id
+            ]);
+        });
+
+        News::all()->each(function ($news) {
+            Comment::factory()->count(3)->create([
+                'news_id' => $news->id,
+                'user_id' => User::inRandomOrder()->first()->id,
+            ]);
+        });
     }
 }
